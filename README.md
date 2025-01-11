@@ -2,9 +2,11 @@
 
 ## Integrantes do grupo
 
-Aluno 1 - Jacksoan Eufrosino de Freitas - 20231380018
-Aluno 2 - Gabriel Lavor de Albuquerque - 20231380037
-Professor - Pedro Batista de Carvalho Filho
+- Aluno 1 - Jacksoan Eufrosino de Freitas - 20231380018
+- Aluno 2 - Gabriel Lavor de Albuquerque - 20231380037
+- Professor - Pedro Batista de Carvalho Filho
+
+## Introdução
 
 Este projeto visa automatizar tarefas de administração de sistemas utilizando **Ansible** para provisionamento e configuração de servidores. O objetivo é configurar um ambiente de servidor com as seguintes características:
 
