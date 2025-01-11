@@ -47,6 +47,8 @@ O projeto é dividido em arquivos e diretórios conforme abaixo:
 ```
 projeto/
 ├── playbook.yml             # Playbook principal que executa as tarefas
+├── requirements.yml         # Arquivo contendo dependencias do projeto
+├── Vagrantfile              # Arquivo do vagrant para provisionar uma maquina virtual
 └── roles/                   # Diretório contendo as roles para diferentes tarefas
     ├── apt/                 # Atualizações e gerenciamento de pacotes
     │   └── tasks/
@@ -92,7 +94,6 @@ projeto/
      git clone https://github.com/Jacksoan-Eufrosino/projeto_ASA.git
      cd projeto_ASA
      ```
-3. Configuração do Vagrant:
    - Instale as dependencias do **Ansible** como os modulos _ansible.posix_ e _community.general_
      ```bash
      ansible-galaxy install -r requirements.yml
@@ -101,4 +102,4 @@ projeto/
      ```bash
      vagrant up
      ```
-   - Isso irá provisionar a máquina virtual automaticamente usando o **Ansible**.
+     Isso irá provisionar a máquina virtual automaticamente usando o **Ansible**.
