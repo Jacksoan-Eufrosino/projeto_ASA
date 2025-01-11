@@ -1,0 +1,5 @@
+---
+# IMPORTANTE - executar o comando "ansible-galaxy install -r requirements.yml" antes de rodar o playbook
+collections:
+  - name: ansible.posix
+  - name: community.general

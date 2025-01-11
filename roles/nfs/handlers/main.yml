@@ -1,0 +1,7 @@
+---
+# handlers file for nfs
+- name: Reiniciar NFS
+  become: true
+  ansible.builtin.service:
+    name: nfs-kernel-server
+    state: restarted

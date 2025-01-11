@@ -1,0 +1,24 @@
+- name: Permitir autenticação apenas por chave pública
+  ansible.builtin.replace:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PasswordAuthentication.*"
+    replace: "PasswordAuthentication no"
+  become: true
+  notify: Reiniciar SSH
+
+- name: Bloquear acesso root via SSH
+  ansible.builtin.replace:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PermitRootLogin.*"
+    replace: "PermitRootLogin no"
+  become: true
+  notify: Reiniciar SSH
+
+- name: Permitir acesso ao grupo acesso_ssh
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?AllowGroups.*"
+    line: "AllowGroups acesso_ssh"
+    state: present
+  become: true
+  notify: Reiniciar SSH

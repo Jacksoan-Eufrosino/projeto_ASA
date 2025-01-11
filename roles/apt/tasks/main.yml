@@ -1,0 +1,14 @@
+- name: Atualizar o cache dos pacotes
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: Realizar upgrade de todos os pacotes
+  ansible.builtin.apt:
+    upgrade: dist
+  become: true
+
+- name: Remover pacotes obsoletos
+  ansible.builtin.apt:
+    autoremove: true
+  become: true

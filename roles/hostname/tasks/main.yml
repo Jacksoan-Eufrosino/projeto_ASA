@@ -1,0 +1,4 @@
+- name: Configurar hostname
+  ansible.builtin.hostname:
+    name: p01-jacksoan-gabriel
+  become: true

@@ -1,0 +1,50 @@
+- name: Instalar o LVM2
+  ansible.builtin.apt:
+    name: lvm2
+    state: present
+    update_cache: true
+  become: true
+
+- name: Criar Volume Group
+  community.general.lvg:
+    vg: dados
+    pvs:
+      - /dev/sdb
+      - /dev/sdc
+      - /dev/sdd
+  become: true
+
+- name: Criar Logical Volume
+  community.general.lvol:
+    vg: dados
+    lv: sistema
+    size: 15g
+  become: true
+
+- name: Formatar o Logical Volume
+  community.general.filesystem:
+    fstype: ext4
+    dev: /dev/dados/sistema
+  become: true
+
+- name: Criar diretório /dados
+  ansible.builtin.file:
+    path: /dados
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Adicionar entrada ao fstab
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    line: "/dev/dados/sistema /dados ext4 defaults 0 0"
+    state: present
+  become: true
+
+- name: Montar partição /dados
+  ansible.posix.mount:
+    path: /dados
+    src: /dev/dados/sistema
+    fstype: ext4
+    state: mounted
+  become: true

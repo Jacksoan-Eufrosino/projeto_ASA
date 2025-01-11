@@ -1,0 +1,52 @@
+---
+# tasks file for nfs
+- name: Instalar pacotes necessários para NFS
+  become: true
+  ansible.builtin.apt:
+    name: nfs-kernel-server
+    state: present
+
+- name: Criar o usuário "nfs-ifpb" com shell desabilitado
+  become: true
+  ansible.builtin.user:
+    name: nfs-ifpb
+    shell: /usr/sbin/nologin
+    state: present
+
+- name: Obter informações do usuário "nfs-ifpb"
+  ansible.builtin.getent:
+    database: passwd
+    key: nfs-ifpb
+  register: nfs_user
+
+- name: Criar o diretório /dados/nfs
+  become: true
+  ansible.builtin.file:
+    path: /dados/nfs
+    state: directory
+    owner: nfs-ifpb
+    group: nfs-ifpb
+    mode: "0755"
+
+- name: Configurar exportação NFS para /dados/nfs
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/exports
+    line: >
+      /dados/nfs 192.168.57.0/24(
+      rw,
+      sync,
+      no_subtree_check,
+      all_squash,
+      anonuid={{ nfs_user.ansible_facts.getent_passwd['nfs-ifpb'][1] | int }},
+      anongid={{ nfs_user.ansible_facts.getent_passwd['nfs-ifpb'][2] | int }}
+      )
+    state: present
+  notify: Reiniciar NFS
+
+- name: Garantir que o serviço NFS está habilitado na inicialização
+  become: true
+  ansible.builtin.service:
+    name: nfs-kernel-server
+    enabled: true
+  notify: Reiniciar NFS

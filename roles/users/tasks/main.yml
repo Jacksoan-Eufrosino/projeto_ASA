@@ -1,0 +1,15 @@
+- name: Criar usuário jacksoan
+  ansible.builtin.user:
+    name: jacksoan
+    state: present
+    shell: /bin/bash
+    generate_ssh_key: true
+  become: true
+
+- name: Criar usuário gabriel
+  ansible.builtin.user:
+    name: gabriel
+    state: present
+    shell: /bin/bash
+    generate_ssh_key: true
+  become: true

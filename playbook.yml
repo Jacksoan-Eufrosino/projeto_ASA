@@ -1,0 +1,11 @@
+- name: Projeto de administração de sistemas aberto
+  hosts: all
+
+  roles:
+    - apt
+    - hostname
+    - users
+    - ssh
+    - lvm
+    - nfs
+    - logging
