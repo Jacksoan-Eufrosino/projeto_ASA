@@ -3,7 +3,7 @@
     name: jacksoan
     state: present
     shell: /bin/bash
-    # generate_ssh_key: true
+    generate_ssh_key: true
   become: true
 
 - name: Criar usuário gabriel
@@ -11,7 +11,7 @@
     name: gabriel
     state: present
     shell: /bin/bash
-    # generate_ssh_key: true
+    generate_ssh_key: true
   become: true
 
 - name: Criar o grupo acesso_ssh
