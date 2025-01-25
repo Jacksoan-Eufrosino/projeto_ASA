@@ -2,10 +2,11 @@
   hosts: all
 
   roles:
-    - apt
+    # - apt
     - hostname
     - users
     - ssh
     - lvm
     - nfs
     - logging
+    - teste

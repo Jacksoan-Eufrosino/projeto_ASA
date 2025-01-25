@@ -5,7 +5,7 @@
     update_cache: true
   become: true
 
-- name: Criar Volume Group
+- name: Criar Volume Group "dados"
   community.general.lvg:
     vg: dados
     pvs:
@@ -14,14 +14,14 @@
       - /dev/sdd
   become: true
 
-- name: Criar Logical Volume
+- name: Criar Logical Volume "sistema"
   community.general.lvol:
     vg: dados
     lv: sistema
     size: 15g
   become: true
 
-- name: Formatar o Logical Volume
+- name: Formatar o LV "sistema" cmo ext4
   community.general.filesystem:
     fstype: ext4
     dev: /dev/dados/sistema

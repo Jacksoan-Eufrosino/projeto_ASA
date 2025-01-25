@@ -1,3 +1,10 @@
+- name: Criar motd do ssh
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/motd
+    content: |
+      Acesso restrito apenas à pessoas com autorização expressa. Seu acesso está sendo monitorado !!!
+
 - name: Permitir autenticação apenas por chave pública
   ansible.builtin.replace:
     path: /etc/ssh/sshd_config

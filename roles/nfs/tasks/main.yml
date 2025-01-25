@@ -1,5 +1,4 @@
 ---
-# tasks file for nfs
 - name: Instalar pacotes necessários para NFS
   become: true
   ansible.builtin.apt:

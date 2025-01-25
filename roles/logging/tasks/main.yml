@@ -1,5 +1,4 @@
 ---
-# tasks file for logging
 - name: Criar o arquivo de log de acessos
   become: true
   ansible.builtin.file:

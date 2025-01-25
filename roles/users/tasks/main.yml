@@ -3,7 +3,7 @@
     name: jacksoan
     state: present
     shell: /bin/bash
-    generate_ssh_key: true
+    # generate_ssh_key: true
   become: true
 
 - name: Criar usuário gabriel
@@ -11,5 +11,66 @@
     name: gabriel
     state: present
     shell: /bin/bash
-    generate_ssh_key: true
+    # generate_ssh_key: true
   become: true
+
+- name: Criar o grupo acesso_ssh
+  become: true
+  ansible.builtin.group:
+    name: acesso_ssh
+    state: present
+
+- name: Cria o grupo ifpb
+  become: true
+  ansible.builtin.group:
+    name: ifpb
+    state: present
+
+- name: Adicionar o usuário "vagrant" ao grupo "acesso_ssh"
+  become: true
+  ansible.builtin.user:
+    name: vagrant
+    groups: acesso_ssh
+    append: true
+
+- name: Adicionar o usuário "jacksoan" ao grupo "acesso_ssh"
+  become: true
+  ansible.builtin.user:
+    name: jacksoan
+    groups: acesso_ssh
+    append: true
+
+- name: Adicionar o usuário "gabriel" ao grupo "acesso_ssh"
+  become: true
+  ansible.builtin.user:
+    name: gabriel
+    groups: acesso_ssh
+    append: true
+
+- name: Adicionar o usuário "vagrant" ao grupo "ifpb"
+  become: true
+  ansible.builtin.user:
+    name: vagrant
+    groups: ifpb
+    append: true
+
+- name: Adicionar o usuário "jacksoan" ao grupo "ifpb"
+  become: true
+  ansible.builtin.user:
+    name: jacksoan
+    groups: ifpb
+    append: true
+
+- name: Adicionar o usuário "gabriel" ao grupo "ifpb"
+  become: true
+  ansible.builtin.user:
+    name: gabriel
+    groups: ifpb
+    append: true
+
+- name: Permite que usuarios do grupo ifpb usem o sudo
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: "%ifpb ALL=(ALL) NOPASSWD: ALL"
+    validate: "/usr/sbin/visudo -cf %s"
