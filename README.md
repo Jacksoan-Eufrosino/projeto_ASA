@@ -54,6 +54,7 @@ O projeto é dividido em arquivos e diretórios conforme abaixo:
 
 ```
 projeto/
+├── chaves/                  # Diretorio contendo chaves pub/privadas dos usuarios
 ├── playbook.yml             # Playbook principal que executa as tarefas
 ├── requirements.yml         # Arquivo contendo dependencias do projeto
 ├── Vagrantfile              # Arquivo do vagrant para provisionar uma maquina virtual
@@ -87,10 +88,10 @@ projeto/
 
 ## Requisitos
 
-- Vagrant - Para provisionamento de máquinas virtuais.
-- VirtualBox ou outro provedor de Vagrant compatível.
-- Ansible - Para automação de configuração.
-- Sistema operacional baseado em Linux (ex: Ubuntu, Debian).
+- **Vagrant** - Para provisionamento de máquinas virtuais.
+- **VirtualBox** ou outro provedor de Vagrant compatível.
+- **Ansible** - Para automação de configuração.
+- Sistema operacional baseado em **Linux** (ex: Ubuntu, Debian).
 
 ## Como Usar
 
@@ -105,6 +106,10 @@ projeto/
    - Instale as dependencias do **Ansible** como os modulos _ansible.posix_ e _community.general_
      ```bash
      ansible-galaxy install -r requirements.yml
+     ```
+   - Instale o plugin do **Vagrant** que desativa a atualização automática do _Guest Additions_
+     ```bash
+     vagrant plugin install vagrant-vbguest
      ```
    - Inicie a máquina virtual com o Vagrant:
      ```bash
