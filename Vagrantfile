@@ -1,6 +1,5 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "generic/debian12"
-  config.vm.box_version = "4.3.12"
+  config.vm.box = "debian/bookworm64"
   #A versao do Guest Additions dessa box é a 6.0, ja a do meu virtualbox
   #é a versao 7.1, logo estava gerando incompatibilidade. Foi necessario a
   #instalacao de um plugin para realizar o gerenciamento da guest additions

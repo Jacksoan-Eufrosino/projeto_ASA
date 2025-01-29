@@ -3,7 +3,14 @@
     name: jacksoan
     state: present
     shell: /bin/bash
-    generate_ssh_key: true
+    # generate_ssh_key: true
+  become: true
+
+- name: Adicionar chave pública ao authorized_keys de "jacksoan"
+  ansible.posix.authorized_key:
+    user: jacksoan
+    state: present
+    key: "{{ lookup('file', './chaves/jacksoan.pub') }}"
   become: true
 
 - name: Criar usuário gabriel
@@ -11,7 +18,14 @@
     name: gabriel
     state: present
     shell: /bin/bash
-    generate_ssh_key: true
+    # generate_ssh_key: true
+  become: true
+
+- name: Adicionar chave pública ao authorized_keys de "gabriel"
+  ansible.posix.authorized_key:
+    user: gabriel
+    state: present
+    key: "{{ lookup('file', './chaves/gabriel.pub') }}"
   become: true
 
 - name: Criar o grupo acesso_ssh
