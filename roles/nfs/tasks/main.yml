@@ -31,15 +31,7 @@
   become: true
   ansible.builtin.lineinfile:
     path: /etc/exports
-    line: >
-      /dados/nfs 192.168.57.0/24(
-      rw,
-      sync,
-      no_subtree_check,
-      all_squash,
-      anonuid={{ nfs_user.ansible_facts.getent_passwd['nfs-ifpb'][1] | int }},
-      anongid={{ nfs_user.ansible_facts.getent_passwd['nfs-ifpb'][2] | int }}
-      )
+    line: /dados/nfs 192.168.57.0/24(rw,sync,no_subtree_check,all_squash,anonuid={{ nfs_user.ansible_facts.getent_passwd['nfs-ifpb'][1] | int }},anongid={{ nfs_user.ansible_facts.getent_passwd['nfs-ifpb'][2] | int }})
     state: present
   notify: Reiniciar NFS
 
